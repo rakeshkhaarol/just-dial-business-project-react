@@ -36,8 +36,13 @@ function Login() {
         .then((data)=>{
             console.log(data)
             if(data["jwt"] !== undefined){
-                alert('good')
-                window.localStorage.setItem(data["jwt"])
+
+                
+               // alert('good')
+               window.location.href = '/business_register';
+
+
+                window.localStorage.setItem("jwt_token",data["jwt"])
             }else{
                 alert("bad")
             }

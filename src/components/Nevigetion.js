@@ -6,6 +6,14 @@ import '.././logo.svg'
 
 
 export default function Nevigetion() {
+    //1
+
+    //2.
+    const UserLogout=()=>{
+        //alert('helllllo')
+        window.localStorage.removeItem('jwt_token')
+        window.location.href='/login'
+    }
   return (
     <>
         <Navbar bg="light" expand="lg" className='h-100' > 
@@ -35,8 +43,21 @@ export default function Nevigetion() {
                         navbarScroll
                     >
                         <Link to="/" className='nav nav-link me-3 btn btn-primary text-white'>Home</Link>
-                        <Link to="/login" className='nav nav-link me-3 btn btn-primary text-white'>login</Link>
-                        <Link to="/register" className='nav nav-link btn btn-primary text-white'>register</Link>
+                        {
+                            window.localStorage.getItem("jwt_token") === null &&
+                            <>
+                                <Link to="/login" className='nav nav-link me-3 btn btn-primary text-white'>login</Link>
+                                <Link to="/register" className='nav nav-link btn btn-primary text-white'>register</Link>
+                            </>
+                        }
+                        {
+                            window.localStorage.getItem("jwt_token") !== null &&
+                            <>
+                                <Nav.Link  className='nav nav-link me-3 btn btn-primary text-white' onClick={()=>{UserLogout()}} >logout</Nav.Link>
+                                
+                            </>
+                        }
+                        
                     </Nav>
                   
                 </Navbar.Collapse>
